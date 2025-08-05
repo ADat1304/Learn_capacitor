@@ -1,0 +1,133 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+* {
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: 20px;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 20px;
+}
+.navbar-avatar {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  float: none;
+}
+.navbar-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #d1cfda86;
+  border-radius: 25px;
+  padding: 8px 18px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.search-box img {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  cursor: pointer;
+  
+}
+.search-box img:hover {
+  transform: scale(1.5);
+  transition: transform 0.2s ease-in-out;
+}
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #2d325a;
+  width: 100%;
+}
+/* -----------------------------main content-------------- */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 100px);
+  padding: 20px;
+  flex: 1;
+}
+/* -----------------------------footer------------------- */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 60px;
+}
+
+.footer .menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 10px;
+  overflow: visible;
+}
+
+/* .menu > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+} */
+
+.menu .home-icon,
+.menu .plus-icon,
+.menu .folder-icon {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 10%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu .home-icon {
+  background-image: url("../assets/imgs/icon/home.png");
+  scale: 1.2;
+  background-color: #a6aeb6;
+}
+
+.menu .plus-icon {
+  background-image: url("../assets/imgs/icon/plus.png");
+}
+.menu .folder-icon {
+  background-image: url("../assets/imgs/icon/folder.png");
+}
