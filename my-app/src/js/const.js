@@ -29,11 +29,11 @@ export const MainScreenMenu = [
     featureImage: imgGrammar,
     description: "Ngữ pháp",
   },
-  {
-    name: MainMenuTypes.READING,
-    featureImage: imgReading,
-    description: "Đọc hiểu",
-  },
+  // {
+  //   name: MainMenuTypes.READING,
+  //   featureImage: imgReading,
+  //   description: "Đọc hiểu",
+  // },
 ];
 
 export const topics = [

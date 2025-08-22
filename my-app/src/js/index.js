@@ -1,7 +1,19 @@
 import { Capacitor } from "@capacitor/core";
 import { SplashScreen } from "@capacitor/splash-screen";
+import { ScreenManager } from "./ScreenManager";
 
 console.log("index.js loaded");
+(function () {
+  function preventBack() {
+    history.pushState(null, "", location.href);
+  }
+
+  preventBack(); // Đẩy trạng thái vào history khi trang tải
+
+  window.addEventListener("popstate", function () {
+    preventBack(); // Đẩy lại trạng thái nếu người dùng nhấn nút back
+  });
+})();
 window.customElements.define(
   "capacitor-welcome",
   class extends HTMLElement {
@@ -10,96 +22,41 @@ window.customElements.define(
       SplashScreen.hide();
       // const root = this.attachShadow({ mode: "open" });
       this.innerHTML = `
-      <ion-tabs>
-        <ion-tab tab="home">
-        <ion-nav id="home-nav"></ion-nav>
-            <div id="home-page">
-              <ion-header>
-                <ion-toolbar>
-                  <ion-title>Listen now</ion-title>
-                </ion-toolbar>
-              </ion-header>
-                  <ion-content>
-                    <div class="example-content">Listen now content</div>
-                  </ion-content>
-              </div>
-        </ion-tab>
-        <ion-tab tab="radio">
-          <ion-nav id="radio-nav"></ion-nav>
-            <div id="radio-page">
-              <ion-header>
-                <ion-toolbar>
-                  <ion-title>Radio</ion-title>
-                </ion-toolbar>
-              </ion-header>
-              <ion-content>
-                  <div class="example-content">Radio content</div>
-              </ion-content>
-            </div>
-        </ion-tab>
-      <ion-tab tab="library">
-        <ion-nav id="library-nav"></ion-nav>
-          <div id="library-page">
-            <ion-header>
-              <ion-toolbar>
-                <ion-title>Library</ion-title>
-              </ion-toolbar>
-            </ion-header>
-            <ion-content>
-              <div class="example-content">Library content</div>
-            </ion-content>
-          </div>
-  </ion-tab>
-  <ion-tab tab="search">
-    <ion-nav id="search-nav"></ion-nav>
-    <div id="search-page">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Search</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="example-content">Search content</div>
-      </ion-content>
+      <nav class="navbar hide">
+    <div class="navbar-left">
+      <div id="btnCloseTopic"></div>
     </div>
-  </ion-tab>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-      <ion-icon name="home-outline"></ion-icon>
-      Home
-    </ion-tab-button>
-    <ion-tab-button tab="radio">
-      <ion-icon name="radio"></ion-icon>
-      Radio
-    </ion-tab-button>
-    <ion-tab-button tab="library">
-      <ion-icon name="library"></ion-icon>
-      Library
-    </ion-tab-button>
-    <ion-tab-button tab="search">
-      <ion-icon name="search"></ion-icon>
-      Search
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-`;
+    <div class="navbar-center">
+        <span class="navbar-title"></span>
+    </div>
+    </nav>
+      <div class="main-container">
+        <div class="wrapper" id="wrapper">
+          <div class="screen" id="main-screen">
+          </div>
+          <div class="screen center-v" id="topic-screen">
+          </div>
+          <div class="screen" id="extend-screen">
+        </div>
+      </div>
+      `;
+      const screenManager = new ScreenManager();
+      screenManager.goToMainPage();
+      // Check landscape on initial load
+      screenManager.checkOrientation();
+
+      // Listen for screen resize events to check landscape
+      window.addEventListener("resize", screenManager.checkOrientation);
+
+      //Begin: Prevent user press button back in webbroser
+      window.history.pushState(null, "", window.location.href);
+      window.addEventListener("popstate", function () {
+        window.history.pushState(null, "", window.location.href);
+      });
+
+      window.addEventListener("beforeunload", function (event) {
+        event.preventDefault();
+      });
     }
   }
 );
-// //  <ion-tab tab="home">
-//         <ion-nav id="home-nav"></ion-nav>
-//             <div id="home-page">
-//               <ion-header>
-//                 <ion-toolbar>
-//                   <ion-title>Listen now</ion-title>
-//                 </ion-toolbar>
-//               </ion-header>
-//                   <ion-content>
-//                     <div class="example-content">Listen now content</div>
-//                   </ion-content>
-//               </div>
-//         </ion-tab>
-// //<ion-tab-button tab="home">
-//       <ion-icon name="home-outline"></ion-icon>
-//       Home
-//     </ion-tab-button>
